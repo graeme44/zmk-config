@@ -48,16 +48,4 @@
     chosen {
         zmk,underglow = &led_strip;
     };
-
-    /*
-     * External power control for VCC pin
-     * SuperMini uses P0.13 to control VCC output
-     * HIGH = VCC enabled, LOW = VCC disabled
-     */
-    ext-power {
-        compatible = "zmk,ext-power-generic";
-        label = "EXT_POWER";
-        control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
-        init-delay-ms = <250>;
-    };
 };
