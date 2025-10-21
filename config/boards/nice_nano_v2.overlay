@@ -36,7 +36,7 @@
         spi-max-frequency = <4000000>;
 
         /* WS2812 */
-        chain-length = <29>; /* 27 underglow + 2 per-key LEDs for sofle RGB */
+        chain-length = <36>; /* SK6812 mini RGB - Full Sofle RGB v2.1 per side */
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
 
