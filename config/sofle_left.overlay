@@ -1,0 +1,30 @@
+/*
+ * Left keyboard specific configuration
+ *
+ * Remaps I2C SDA pin from P0.17 to P0.22 (D4) because the normal SDA pin
+ * is broken/not connected on the left keyboard hardware.
+ */
+
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 22)>,  /* Remap SDA to D4 (P0.22) - normal pin broken */
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;   /* Keep default SCL pin */
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 22)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
+            low-power-enable;
+        };
+    };
+};
+
+&i2c0 {
+    compatible = "nordic,nrf-twim";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
+};
