@@ -1,0 +1,9 @@
+/*
+ * The Sofle shield in ZMK main now defines the full WS2812 strip on &spi3
+ * (see zmk/app/boards/shields/sofle/boards/nice_nano_nrf52840_zmk.overlay),
+ * so this config overlay only overrides the LED count for this build.
+ */
+
+&led_strip {
+    chain-length = <7>; /* 1 indicator LED + 6 underglow LEDs per side */
+};
