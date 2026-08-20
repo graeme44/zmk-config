@@ -2,15 +2,18 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: mctechnology17
-      url-base: https://github.com/mctechnology17
+    - name: tokyo2006
+      url-base: https://github.com/tokyo2006
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    # Pinned to the Zephyr 4.1 + LVGL 9 migration fork until
+    # https://github.com/mctechnology17/zmk-nice-oled/pull/37 is merged,
+    # then switch back to mctechnology17 main.
     - name: zmk-nice-oled
-      remote: mctechnology17
-      revision: main
+      remote: tokyo2006
+      revision: de5b2afbd05f1a136e31ca28659373cd07d1e443
   self:
     path: config
