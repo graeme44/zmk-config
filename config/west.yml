@@ -2,18 +2,21 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: tokyo2006
-      url-base: https://github.com/tokyo2006
+    - name: mctechnology17
+      url-base: https://github.com/mctechnology17
   projects:
+    # Pinned to the last revisions known to run correctly on this keyboard
+    # (the 2025-11-19 build). ZMK main moved to Zephyr 4.1 + LVGL 9 on
+    # 2025-12-09; on that stack the split peripheral freezes a few seconds
+    # after boot and the halves never finish pairing. Revisit once
+    # https://github.com/mctechnology17/zmk-nice-oled/pull/37 has merged and
+    # settled, then move both back to main together.
     - name: zmk
       remote: zmkfirmware
-      revision: main
+      revision: e34793e8c7193bc868b95ec38d78f67956f759cb
       import: app/west.yml
-    # Pinned to the Zephyr 4.1 + LVGL 9 migration fork until
-    # https://github.com/mctechnology17/zmk-nice-oled/pull/37 is merged,
-    # then switch back to mctechnology17 main.
     - name: zmk-nice-oled
-      remote: tokyo2006
-      revision: de5b2afbd05f1a136e31ca28659373cd07d1e443
+      remote: mctechnology17
+      revision: 5d7dce25735277dd6dcd8295c64e143d4f95cdfa
   self:
     path: config
