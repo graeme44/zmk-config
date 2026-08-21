@@ -61,19 +61,26 @@
             // Anne Pro 2 "Mac.GC" equivalent base layer.
             // Top-right corner = Backspace and the key below it = backslash, matching the
             // Anne's rightmost column. Ctrl sits on the Caps position, as on the Anne.
+            //
+            // Backspace and Space take the two forward thumb keys, one per hand, so the
+            // type/backspace/retype cycle alternates thumbs. Enter moves to the right thumb
+            // where the Anne trained it, pushing RAISE onto the grid key it vacates (RAISE
+            // only carries Bluetooth and the numpad, so the longer reach is cheap). Right
+            // Ctrl is dropped as redundant. The top-right Backspace is kept during the
+            // transition so the old pinky habit still works; make it DEL once it fades.
             // ------------------------------------------------------------------------------------------------------------
             // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   | BKSPC |
             // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   |   \   |
             // | CTRL  |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
             // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  MUTE  |  | PASS  |  N   |  M    |  ,    |  .   |   /   | SHIFT |
-            //               | CTRL | ALT | CMD  | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
+            //               | CTRL | ALT | CMD  | LOWER| BKSPC  |  | SPACE | ENTER| RAISE | ALT   | GUI  |
 
             bindings = <
 &kp ESC           &kp N1  &kp N2            &kp N3    &kp N4        &kp N5                           &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
 &kp TAB           &kp Q   &kp W             &kp E     &kp R         &kp T                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
 &kp LEFT_CONTROL  &kp A   &kp S             &kp D     &kp F         &kp G                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT         &kp Z   &kp X             &kp C     &kp V         &kp B   &kp C_MUTE    &password_macro      &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-                          &kp LEFT_CONTROL  &kp LALT  &kp LEFT_WIN  &lower_layer   &kp RET       &kp SPACE  &raise_layer   &kp RCTRL  &kp RALT   &kp RGUI
+                          &kp LEFT_CONTROL  &kp LALT  &kp LEFT_WIN  &lower_layer   &kp BSPC      &kp SPACE  &kp RET        &raise_layer  &kp RALT   &kp RGUI
             >;
 
             sensor-bindings =
