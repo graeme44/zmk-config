@@ -12,15 +12,29 @@
 #     shield: reviung41
 #
 ---
-# DIAGNOSTIC BUILD: both halves get USB CDC logging so the split pairing
-# failure can be read over serial. Studio is dropped from the left half for
-# this build to keep one log port per half. Do not merge to master.
+# DIAGNOSTIC BUILD: chasing a peripheral freeze a few seconds after boot.
+# Left half logs over USB CDC. Three right-half variants isolate the cause:
+#   nodisplay - no OLED shield at all; if the split holds, the display is at fault
+#   bigmem    - LVGL pool and display thread stack raised to the central's values
+#   immediate - synchronous logging, so a fatal fault is flushed before the halt
+# Do not merge to master.
 include:
   - board: nice_nano//zmk
     shield: sofle_left nice_oled
     snippet: zmk-usb-logging
   - board: nice_nano//zmk
+    shield: sofle_right
+    snippet: zmk-usb-logging
+    artifact-name: right-nodisplay
+  - board: nice_nano//zmk
     shield: sofle_right nice_oled
     snippet: zmk-usb-logging
+    cmake-args: -DCONFIG_LV_Z_MEM_POOL_SIZE=8192 -DCONFIG_ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE=8192
+    artifact-name: right-bigmem
+  - board: nice_nano//zmk
+    shield: sofle_right nice_oled
+    snippet: zmk-usb-logging
+    cmake-args: -DCONFIG_LOG_MODE_IMMEDIATE=y
+    artifact-name: right-immediate
   - board: nice_nano//zmk
     shield: settings_reset
