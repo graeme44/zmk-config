@@ -1,0 +1,38 @@
+/*
+ * EXPERIMENT: left-half I2C SDA remap, P0.17 -> P0.22 (Pro Micro D4).
+ *
+ * Retry of 8a73cda (2025-11-01), which was reverted the same day by 4500a8b
+ * with no recorded reason, so treat the "P0.17 is broken" theory as unproven.
+ *
+ * Applies to the left half only: ZMK matches <shield>.overlay from the config
+ * root, so this file is picked up for `sofle_left` and never for `sofle_right`.
+ * It does not displace config/boards/nice_nano_v2.overlay (the WS2812 LED
+ * strip), which Zephyr discovers through a separate mechanism.
+ *
+ * If the left OLED goes dark rather than coming back, P0.22 is not wired to
+ * SDA on this hardware -- reflash the left half from WORKING-sofle_left.uf2.
+ */
+
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 22)>,  /* Remap SDA to D4 (P0.22) - normal pin broken */
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;   /* Keep default SCL pin */
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 22)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
+            low-power-enable;
+        };
+    };
+};
+
+&i2c0 {
+    compatible = "nordic,nrf-twim";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
+};

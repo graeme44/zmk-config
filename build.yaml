@@ -12,10 +12,10 @@
 #     shield: reviung41
 #
 ---
-# ISOLATION TEST: left half only, no nice_oled module at all, ZMK's built-in
-# status screen. If the panel renders readable text here, the OLED and its I2C
-# bus are fine and nice_oled's 68x160 canvas was the whole problem.
+# DECISIVE TEST: built-in status screen (no nice_oled) + SDA remapped to P0.22,
+# plus USB logging so the SSD1306 init result can be read over serial.
 include:
   - board: nice_nano_v2
     shield: sofle_left
-    artifact-name: left-builtin-screen
+    snippet: zmk-usb-logging
+    artifact-name: left-builtin-p022
