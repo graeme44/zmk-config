@@ -133,3 +133,15 @@
         };
     };
 };
+
+/*
+ * TEST ONLY (experiment/builtin-screen): 128x64 panel geometry.
+ * The Sofle shield hard-codes 128x32 (multiplex-ratio 31, com-sequential).
+ * This lives in the keymap because config overlays are processed BEFORE the
+ * shield, so the `oled` label does not exist yet at that point.
+ */
+&oled {
+    height = <64>;
+    multiplex-ratio = <63>;
+    /delete-property/ com-sequential;
+};
