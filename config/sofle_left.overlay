@@ -36,3 +36,14 @@
     pinctrl-1 = <&i2c0_sleep>;
     pinctrl-names = "default", "sleep";
 };
+
+/*
+ * Panel geometry test: the Sofle shield hard-codes a 128x32 panel
+ * (multiplex-ratio 31, com-sequential). If this display is actually 128x64,
+ * those three settings alone would garble it regardless of display stack.
+ */
+&oled {
+    height = <64>;
+    multiplex-ratio = <63>;
+    /delete-property/ com-sequential;
+};
