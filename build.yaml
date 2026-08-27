@@ -12,12 +12,10 @@
 #     shield: reviung41
 #
 ---
+# ISOLATION TEST: left half only, no nice_oled module at all, ZMK's built-in
+# status screen. If the panel renders readable text here, the OLED and its I2C
+# bus are fine and nice_oled's 68x160 canvas was the whole problem.
 include:
   - board: nice_nano_v2
     shield: sofle_left
-    snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
-  - board: nice_nano_v2
-    shield: sofle_right nice_oled
-  - board: nice_nano_v2
-    shield: settings_reset
+    artifact-name: left-builtin-screen
