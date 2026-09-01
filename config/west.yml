@@ -2,8 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: mctechnology17
-      url-base: https://github.com/mctechnology17
+    - name: graeme44
+      url-base: https://github.com/graeme44
   projects:
     # Pinned to the last revisions known to run correctly on this keyboard
     # (the 2025-11-19 build). ZMK main moved to Zephyr 4.1 + LVGL 9 on
@@ -15,8 +15,11 @@ manifest:
       remote: zmkfirmware
       revision: e34793e8c7193bc868b95ec38d78f67956f759cb
       import: app/west.yml
+    # Fork of mctechnology17/zmk-nice-oled @ 5d7dce2 with the `vim` image asset
+    # replaced by a NewIQ wordmark (branch newiq-wordmark). Selected below with
+    # CONFIG_NICE_OLED_VIM=y. Identical to upstream in every other respect.
     - name: zmk-nice-oled
-      remote: mctechnology17
-      revision: 5d7dce25735277dd6dcd8295c64e143d4f95cdfa
+      remote: graeme44
+      revision: a2226c3e51410a617f56e0afcf1ec10bd2dac1c8
   self:
     path: config
